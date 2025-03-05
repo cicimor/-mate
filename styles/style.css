@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+*:hover {
+    border: none;
+    outline: none;
+}
+*:focus {
+    border: none;
+    outline: none;
+}
+.body {
+    background-image: url(/img/Сочетание\ 1.jpeg);
+    background-size: 150%;
+    font-family: Manrope;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 16px;
+
+}
+
+.header {
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.calculator {
+    display: flex;
+    width: 360px;
+    height: 360px;
+    box-sizing: border-box;
+    border: 2px solid rgb(255, 211, 2);
+    border-radius: 50px;
+    background: rgb(35, 35, 35);
+    flex-direction: column;
+
+
+}
+
+.value-box {
+    display: flex;
+    width: 100%;
+    height: 100px;
+    margin: 48px 0 0;
+    justify-content: space-between;
+}
+
+.input-box {
+    width: 78px;
+    height: 100%;
+    margin: 0 22px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+}
+
+.text-box {
+    margin: 0 0 0 22px;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+}
+
+.calculation-text {
+    color: rgb(166, 166, 166);
+    margin: 0;
+    font-weight: 500;
+}
+
+.calculation-text:not(:last-child) {
+    margin: 0 0 10px;
+}
+
+.input {
+    border: 1px solid rgb(255, 211, 2);
+    border-radius: 10px;
+    background: none;
+    width: 78px;
+    height: 20px;
+    color: white;
+}
+
+.calculation-button {
+    background:  rgb(255, 211, 2);
+    width: 230px;
+height: 35px;
+border-radius: 9px;
+margin: 26px auto 0;
+font-size: 16px;
+}
+
+.past-text {
+    color: rgb(166, 166, 166);
+    margin: 24px auto 0;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.result {
+    color: rgb(255, 211, 2);
+    margin: 30px auto 0;
+    font-size: 22px;
+    font-weight: 400;
+}
