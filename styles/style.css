@@ -22,13 +22,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 
 }
 
 .calculator {
     display: flex;
-    width: 360px;
-    height: 360px;
+    min-width: 360px;
+    min-height: 360px;
     box-sizing: border-box;
     border: 2px solid rgb(255, 211, 2);
     border-radius: 50px;
@@ -79,10 +80,20 @@
     border: 1px solid rgb(255, 211, 2);
     border-radius: 10px;
     background: none;
-    width: 78px;
+    width: 68px;
     height: 20px;
-    color: white;
+    color: rgb(185, 185, 185);
+    padding: 0 0 0 8px;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+
 
 .calculation-button {
     background:  rgb(255, 211, 2);
@@ -91,6 +102,11 @@ height: 35px;
 border-radius: 9px;
 margin: 26px auto 0;
 font-size: 16px;
+border: none;
+}
+
+.calculation-button:active {
+    opacity: 0.6;
 }
 
 .past-text {
@@ -105,4 +121,72 @@ font-size: 16px;
     margin: 30px auto 0;
     font-size: 22px;
     font-weight: 400;
+}
+
+
+
+
+
+.info {
+    margin-top: 10px;
+    flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        min-width: 360px;
+        min-height: 360px;
+        box-sizing: border-box;
+        border: 2px solid rgb(255, 211, 2);
+        border-radius: 50px;
+        background: rgb(35, 35, 35);
+        
+       
+
+}
+
+.info_coin-list {
+    margin: 0 0 0;
+    padding: 0;
+    height: 100%;
+    width: 90%;
+}
+
+.coin-list_item {
+    list-style: none;
+    color: rgb(166, 166, 166);;
+    font-size: 18px;
+    padding: 12px 0 12px;
+    font-weight: 400;
+    display: flex;
+    border-bottom: 1px rgb(255 211 2 / 10%) solid;
+}
+
+.coin-list_item:first-child{
+    padding: 0 0 12px;
+}
+
+.coin-list_item>p {
+    margin: 0;
+    font-weight: 300;
+}
+
+.coin-list_item>p:last-child {
+    margin: 0 0 0 auto;
+}
+
+.coin-list_item:last-child {
+    padding: 12px 0 0 0;
+    border: none;
+}
+
+
+
+.info-value {
+    margin: 0 22px 0 0;
+    padding: 0;
+}
+
+.title {
+    color: white;
+    margin: 25px 0 0;
 }
