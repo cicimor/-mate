@@ -390,5 +390,61 @@
     "token": "NOT",
     "powerBN": "7870634791",
     "users": 425
+  },
+  {
+    "lastBlockNumber": "#upeesl",
+    "lastBlockReward": 0.66243211,
+    "token": "MAJOR",
+    "powerBN": "6378209554",
+    "users": 70
+  },
+  {
+    "lastBlockNumber": "#1pwpvc",
+    "lastBlockReward": 14.64776871,
+    "token": "STARS",
+    "powerBN": "12514788795",
+    "users": 253
+  },
+  {
+    "lastBlockNumber": "#mgim5e",
+    "lastBlockReward": 5751.59448109,
+    "token": "MATE",
+    "powerBN": "21280005681",
+    "users": 289
+  },
+  {
+    "lastBlockNumber": "#5m0yip",
+    "lastBlockReward": 7906.30944859,
+    "token": "DOGS",
+    "powerBN": "15177940402",
+    "users": 206
+  },
+  {
+    "lastBlockNumber": "#qe111z",
+    "lastBlockReward": 0.36054501,
+    "token": "PX",
+    "powerBN": "4045759897",
+    "users": 61
+  },
+  {
+    "lastBlockNumber": "#e5plzo",
+    "lastBlockReward": 8.98271917,
+    "token": "CATI",
+    "powerBN": "10763026949",
+    "users": 84
+  },
+  {
+    "lastBlockNumber": "#f47h1f",
+    "lastBlockReward": 0.04211351,
+    "token": "TON",
+    "powerBN": "19571459029",
+    "users": 384
+  },
+  {
+    "lastBlockNumber": "#wn4tjk",
+    "lastBlockReward": 3.76659913,
+    "token": "NOT",
+    "powerBN": "7227160603",
+    "users": 437
   }
 ]
