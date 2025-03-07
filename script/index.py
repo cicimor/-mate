@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 # Настройки
 URL = "https://api.hashmate-bot.com/v1/mining/pools"  # Замените на нужный сайт
 JSON_FILE = "data.json"
-INTERVAL = 400  # 30 минут (в секундах)
+INTERVAL = 600  # 30 минут (в секундах)
 
 # Подключаемся к уже открытому браузеру
 options = webdriver.ChromeOptions()
