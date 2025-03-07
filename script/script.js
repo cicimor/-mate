@@ -4,7 +4,6 @@ butt.onclick = function() {
     var val_Br = document.getElementById('input-3').value;
     var result = (val_Br*0.5)*(val_Yp/val_Tp);
     document.getElementById('str').innerHTML=result.toFixed(4) + ' TOKENS';
-    window. open('https://api.hashmate-bot.com/v1/mining/pools', '_blank');
 };
 
 async function loadJson() {
