@@ -219,6 +219,19 @@ border: none;
     
   }
 
+  .switch input:active {
+    box-shadow: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .switch:focus,
+.switch:active,
+.switch:checked {
+    outline: none;
+    box-shadow: none;
+    -webkit-tap-highlight-color: transparent; /* Убираем подсветку на мобильных */
+}
+
   /* Стиль для фона свича */
   .slider {
     position: absolute;
