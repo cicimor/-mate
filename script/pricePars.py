@@ -10,7 +10,7 @@ TOKEN_IDS = {
     "CATI": "catizen",
     "TON": "the-open-network",
     "NOT": "notcoin",
-    "DOGS": "dogs",
+    "DOGS": "dogs-2",
     "PX": "not-pixel",
     "MAJOR": "major"
 }

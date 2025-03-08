@@ -55,7 +55,7 @@ async function processDataPriceStars() {
         const sum = token.reduce((acc, value) => acc + value, 0);  // Суммируем все элементы массива
         const average = sum / token.length;  // Делим сумму на количество элементов
         var starPrice = 0.028
-        var Starsp = document.getElementById('STARS-p').innerText = '$' + (average * starPrice).toFixed(2) + 'USD'
+        var Starsp = document.getElementById('STARS-p').innerText = ` $${(average * starPrice).toFixed(2)} USD`;
         return Starsp
         
     
