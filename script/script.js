@@ -21,6 +21,47 @@ async function loadJson() {
 }
 
 
+async function loadJsonPrice() {
+    try {
+        const response = await fetch('price.json');  // Указывайте путь к вашему JSON
+        const data = await response.json();  // Преобразует JSON в объект
+        return data;  // Возвращаем данные
+    } catch (error) {
+        console.error('Ошибка при загрузке JSON:', error);
+        return null;  // Возвращаем null в случае ошибки
+    }
+}
+
+
+async function processDataPrice(pNamePrice,tokenName) {
+    const dataPrice = await loadJsonPrice();  // Дожидаемся завершения загрузки
+    
+    const price = dataPrice[tokenName];
+
+
+
+    const data = await loadJson();  // Дожидаемся завершения загрузки
+    let token = processTokenData(data, `${tokenName}`);
+    const sum = token.reduce((acc, value) => acc + value, 0);  // Суммируем все элементы массива
+    const average = sum / token.length;  // Делим сумму на количество элементов         console.log(token)
+
+    document.getElementById(`${pNamePrice}`).innerText = ` $${(average * price).toFixed(2)} USD`;
+}
+
+async function processDataPriceStars() {
+    
+    const data = await loadJson();  // Дожидаемся завершения загрузки
+        let token = processTokenData(data, `STARS`);
+        const sum = token.reduce((acc, value) => acc + value, 0);  // Суммируем все элементы массива
+        const average = sum / token.length;  // Делим сумму на количество элементов
+        var starPrice = 0.028
+        var Starsp = document.getElementById('STARS-pPrice').innerText = '$' + (average * starPrice).toFixed(2) + 'USD'
+        return Starsp
+        
+    
+
+}
+
 // Пример использования данных в другой функции
 async function processData(pName,tokenName) {
     const data = await loadJson();  // Дожидаемся завершения загрузки
@@ -41,6 +82,7 @@ function processTokenData(data, tokenName) {
 
 
 
+
 processData("CATI-p","CATI");
 processData("TON-p","TON");
 processData("NOT-p","NOT");
@@ -51,42 +93,13 @@ processData("MAJOR-p","MAJOR");
 processData("MATE-p","MATE");
 
 
-async function processDataPrice(pNamePrice,tokenName, tokenN) {
-    
-    const data = await loadJson();  // Дожидаемся завершения загрузки
-        let token = processTokenData(data, `${tokenName}`);
-        const sum = token.reduce((acc, value) => acc + value, 0);  // Суммируем все элементы массива
-        const average = sum / token.length;  // Делим сумму на количество элементов
-        
 
-
-
-
-        let url = `https://api.coingecko.com/api/v3/simple/price?ids=${tokenN}&vs_currencies=usd`;
-    
-    try {
-        await new Promise(resolve => setTimeout(resolve, 3000));
-        const response = await axios.get(url);
-        const price = response.data[tokenN]?.usd;
-
-        if (!price) {
-            document.getElementById(`${pNamePrice}`).innerText = "Ошибка: токен не найден!";
-            return;
-        }
-
-        document.getElementById(`${pNamePrice}`).innerText = ` $${(1 * price).toFixed(6)} USD`;
-    } catch (error) {
-        document.getElementById(`${pNamePrice}`).innerText = "Ошибка при получении данных!";
-        console.error(error);
-    }
-}
-
-
-processDataPrice("CATI-pPrice","CATI","catizen")
-processDataPrice("TON-pPrice","TON","the-open-network")
-processDataPrice("NOT-pPrice","NOT","notcoin")
-processDataPrice("DOGS-pPrice","DOGS","dogechain")
-processDataPrice("PX-pPrice","PX","not-pixel")
-processDataPrice("MAJOR-pPrice","MAJOR","major")
+processDataPriceStars()
+processDataPrice("CATI-pPrice","CATI")
+processDataPrice("TON-pPrice","TON")
+processDataPrice("NOT-pPrice","NOT")
+processDataPrice("DOGS-pPrice","DOGS")
+processDataPrice("PX-pPrice","PX")
+processDataPrice("MAJOR-pPrice","MAJOR")
 
 

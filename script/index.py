@@ -4,7 +4,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 # Настройки
-URL = "https://api.hashmate-bot.com/v1/mining/pools"  # Замените на нужный сайт
+URL = "https://api.hashmate-bot.com/v1/mining/pools"
+URLTG = "https://web.telegram.org/a/"  
 JSON_FILE = "data.json"
 INTERVAL = 600  # 30 минут (в секундах)
 
@@ -41,6 +42,8 @@ def scrape_data():
         return []
     
 
+
+
 def refresh_page():
     """Перезагружает страницу."""
     print("🔄 Перезагрузка страницы...")
@@ -50,7 +53,7 @@ def refresh_page():
 def main():
     """Основной цикл парсинга."""
     while True:
-
+        
         # Перезагружаем страницу
         refresh_page()
 
