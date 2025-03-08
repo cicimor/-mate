@@ -1,5 +1,5 @@
 
-
+const switchInput = document.getElementById('switch-input');
 
 butt.onclick = function() {
     var val_Tp = document.getElementById('input-1').value;
@@ -55,7 +55,7 @@ async function processDataPriceStars() {
         const sum = token.reduce((acc, value) => acc + value, 0);  // Суммируем все элементы массива
         const average = sum / token.length;  // Делим сумму на количество элементов
         var starPrice = 0.028
-        var Starsp = document.getElementById('STARS-pPrice').innerText = '$' + (average * starPrice).toFixed(2) + 'USD'
+        var Starsp = document.getElementById('STARS-p').innerText = '$' + (average * starPrice).toFixed(2) + 'USD'
         return Starsp
         
     
@@ -80,9 +80,6 @@ function processTokenData(data, tokenName) {
 }
 
 
-
-
-
 processData("CATI-p","CATI");
 processData("TON-p","TON");
 processData("NOT-p","NOT");
@@ -92,14 +89,28 @@ processData("PX-p","PX");
 processData("MAJOR-p","MAJOR");
 processData("MATE-p","MATE");
 
+switchInput.addEventListener('change', function() {
+    if (switchInput.checked) {
+        processDataPriceStars()
+        processDataPrice("CATI-p","CATI")
+        processDataPrice("TON-p","TON")
+        processDataPrice("NOT-p","NOT")
+        processDataPrice("DOGS-p","DOGS")
+        processDataPrice("PX-p","PX")
+        processDataPrice("MAJOR-p","MAJOR")
+    } else {
+        processData("CATI-p","CATI");
+        processData("TON-p","TON");
+        processData("NOT-p","NOT");
+        processData("STARS-p","STARS");
+        processData("DOGS-p","DOGS");
+        processData("PX-p","PX");
+        processData("MAJOR-p","MAJOR");
+        processData("MATE-p","MATE");
+    }
+    
+  });
 
 
-processDataPriceStars()
-processDataPrice("CATI-pPrice","CATI")
-processDataPrice("TON-pPrice","TON")
-processDataPrice("NOT-pPrice","NOT")
-processDataPrice("DOGS-pPrice","DOGS")
-processDataPrice("PX-pPrice","PX")
-processDataPrice("MAJOR-pPrice","MAJOR")
 
 

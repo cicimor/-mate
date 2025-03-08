@@ -4086,5 +4086,117 @@
     "token": "NOT",
     "powerBN": "6831983844",
     "users": 375
+  },
+  {
+    "lastBlockNumber": "#6wa5me",
+    "lastBlockReward": 0.03989682,
+    "token": "MAJOR",
+    "powerBN": "5803218677",
+    "users": 55
+  },
+  {
+    "lastBlockNumber": "#jwf3l7",
+    "lastBlockReward": 9.03608345,
+    "token": "STARS",
+    "powerBN": "15748208314",
+    "users": 224
+  },
+  {
+    "lastBlockNumber": "#oecuhy",
+    "lastBlockReward": 246.11724338,
+    "token": "MATE",
+    "powerBN": "25811533947",
+    "users": 298
+  },
+  {
+    "lastBlockNumber": "#45r53f",
+    "lastBlockReward": 152.91099536,
+    "token": "DOGS",
+    "powerBN": "20661519935",
+    "users": 176
+  },
+  {
+    "lastBlockNumber": "#bbols0",
+    "lastBlockReward": 0.45020952,
+    "token": "PX",
+    "powerBN": "3013006751",
+    "users": 52
+  },
+  {
+    "lastBlockNumber": "#ctpfnq",
+    "lastBlockReward": 1.1180642,
+    "token": "CATI",
+    "powerBN": "5451730990",
+    "users": 77
+  },
+  {
+    "lastBlockNumber": "#omyj88",
+    "lastBlockReward": 0.02810792,
+    "token": "TON",
+    "powerBN": "14290777276",
+    "users": 404
+  },
+  {
+    "lastBlockNumber": "#soz534",
+    "lastBlockReward": 37.68830668,
+    "token": "NOT",
+    "powerBN": "6484675148",
+    "users": 376
+  },
+  {
+    "lastBlockNumber": "#l3mj5k",
+    "lastBlockReward": 0.65418435,
+    "token": "MAJOR",
+    "powerBN": "5715388800",
+    "users": 63
+  },
+  {
+    "lastBlockNumber": "#kf9bqt",
+    "lastBlockReward": 16.33202092,
+    "token": "STARS",
+    "powerBN": "15932150775",
+    "users": 219
+  },
+  {
+    "lastBlockNumber": "#1ukxn7",
+    "lastBlockReward": 37.80626794,
+    "token": "MATE",
+    "powerBN": "26217776225",
+    "users": 306
+  },
+  {
+    "lastBlockNumber": "#lxslme",
+    "lastBlockReward": 1080.2813018,
+    "token": "DOGS",
+    "powerBN": "13313912383",
+    "users": 169
+  },
+  {
+    "lastBlockNumber": "#2bwr4y",
+    "lastBlockReward": 0.42157693,
+    "token": "PX",
+    "powerBN": "3691925831",
+    "users": 52
+  },
+  {
+    "lastBlockNumber": "#1llixx",
+    "lastBlockReward": 0.25424612,
+    "token": "CATI",
+    "powerBN": "3700630570",
+    "users": 74
+  },
+  {
+    "lastBlockNumber": "#4agryq",
+    "lastBlockReward": 0.01679562,
+    "token": "TON",
+    "powerBN": "11931035294",
+    "users": 409
+  },
+  {
+    "lastBlockNumber": "#r0pxco",
+    "lastBlockReward": 766.77362429,
+    "token": "NOT",
+    "powerBN": "10226916957",
+    "users": 390
   }
 ]
