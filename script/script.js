@@ -9,9 +9,9 @@ butt.onclick = function() {
     document.getElementById('str').innerHTML=result.toFixed(4) + ' TOKENS';
 };
 
-async function loadJson() {
+async function loadJson(jsonName) {
     try {
-        const response = await fetch('data.json');  // Указывайте путь к вашему JSON
+        const response = await fetch([jsonName]);  // Указывайте путь к вашему JSON
         const data = await response.json();  // Преобразует JSON в объект
         return data;  // Возвращаем данные
     } catch (error) {
@@ -20,27 +20,16 @@ async function loadJson() {
     }
 }
 
-
-async function loadJsonPrice() {
-    try {
-        const response = await fetch('price.json');  // Указывайте путь к вашему JSON
-        const data = await response.json();  // Преобразует JSON в объект
-        return data;  // Возвращаем данные
-    } catch (error) {
-        console.error('Ошибка при загрузке JSON:', error);
-        return null;  // Возвращаем null в случае ошибки
-    }
-}
 
 
 async function processDataPrice(pNamePrice,tokenName) {
-    const dataPrice = await loadJsonPrice();  // Дожидаемся завершения загрузки
+    const dataPrice = await loadJson('price.json');  // Дожидаемся завершения загрузки
     
     const price = dataPrice[tokenName];
 
 
 
-    const data = await loadJson();  // Дожидаемся завершения загрузки
+    const data = await loadJson('data.json');  // Дожидаемся завершения загрузки
     let token = processTokenData(data, `${tokenName}`);
     const sum = token.reduce((acc, value) => acc + value, 0);  // Суммируем все элементы массива
     const average = sum / token.length;  // Делим сумму на количество элементов         console.log(token)
@@ -50,7 +39,7 @@ async function processDataPrice(pNamePrice,tokenName) {
 
 async function processDataPriceStars() {
     
-    const data = await loadJson();  // Дожидаемся завершения загрузки
+    const data = await loadJson('data.json');  // Дожидаемся завершения загрузки
         let token = processTokenData(data, `STARS`);
         const sum = token.reduce((acc, value) => acc + value, 0);  // Суммируем все элементы массива
         const average = sum / token.length;  // Делим сумму на количество элементов
@@ -62,16 +51,32 @@ async function processDataPriceStars() {
 
 }
 
-// Пример использования данных в другой функции
+
 async function processData(pName,tokenName) {
-    const data = await loadJson();  // Дожидаемся завершения загрузки
+    const data = await loadJson('data.json');  // Дожидаемся завершения загрузки
         let token = processTokenData(data, `${tokenName}`);
         const sum = token.reduce((acc, value) => acc + value, 0);  // Суммируем все элементы массива
         const average = sum / token.length;  // Делим сумму на количество элементов
-        document.getElementById(`${pName}`).innerHTML = average.toFixed(4);
+        document.getElementById(`${pName}`).innerHTML = average.toFixed(2);
+}
+
+async function processDataPower(pName,tokenName) {
+    const data = await loadJson('data.json');  // Дожидаемся завершения загрузки
+        let token = processTokenDataPower(data, `${tokenName}`);
+        const sum = token.reduce((acc, value) => acc + value/1000000000, 0);  // Суммируем все элементы массива
+        const average = sum / token.length;  // Делим сумму на количество элементов
+        document.getElementById(`${pName}`).innerHTML = 'Hash rate: ' + average.toFixed(2) + " Ph/s";
 }
 
 // Функция для обработки данных по токену
+function processTokenDataPower(data, tokenName) {
+    const filteredData = data.filter(item => item.token === tokenName);
+    const rewards = filteredData.map(item => item.powerBN);
+    const reward = (`${tokenName} rewards:`, rewards);
+    return reward
+}
+
+
 function processTokenData(data, tokenName) {
     const filteredData = data.filter(item => item.token === tokenName);
     const rewards = filteredData.map(item => item.lastBlockReward);
@@ -88,6 +93,20 @@ processData("DOGS-p","DOGS");
 processData("PX-p","PX");
 processData("MAJOR-p","MAJOR");
 processData("MATE-p","MATE");
+
+
+processDataPower("CATI-hr", 'CATI')
+processDataPower("TON-hr", 'TON')
+processDataPower("NOT-hr", 'NOT')
+processDataPower("STARS-hr", 'STARS')
+processDataPower("DOGS-hr", 'DOGS')
+processDataPower("PX-hr", 'PX')
+processDataPower("MAJOR-hr", 'MAJOR')
+processDataPower("MATE-hr", 'MATE')
+
+
+
+
 
 switchInput.addEventListener('change', function() {
     if (switchInput.checked) {
