@@ -1,12 +1,12 @@
 
 const switchInput = document.getElementById('switch-input');
 
-butt.onclick = function() {
+butt.onclick = function () {
     var val_Tp = document.getElementById('input-1').value;
     var val_Yp = document.getElementById('input-2').value;
     var val_Br = document.getElementById('input-3').value;
-    var result = (val_Br*0.5)*(val_Yp/val_Tp);
-    document.getElementById('str').innerHTML=result.toFixed(4) + ' TOKENS';
+    var result = (val_Br * 0.5) * (val_Yp / val_Tp);
+    document.getElementById('str').innerHTML = result.toFixed(4) + ' TOKENS';
 };
 
 async function loadJson(jsonName) {
@@ -22,9 +22,9 @@ async function loadJson(jsonName) {
 
 
 
-async function processDataPrice(pNamePrice,tokenName) {
+async function processDataPrice(pNamePrice, tokenName) {
     const dataPrice = await loadJson('price.json');  // Дожидаемся завершения загрузки
-    
+
     const price = dataPrice[tokenName];
 
 
@@ -37,35 +37,70 @@ async function processDataPrice(pNamePrice,tokenName) {
     document.getElementById(`${pNamePrice}`).innerText = ` $${(average * price).toFixed(2)} USD`;
 }
 
+async function processDataPriceToOnePh(pName, tokenName) {
+    const dataPrice = await loadJson('price.json');  // Дожидаемся завершения загрузки
+    const price = dataPrice[tokenName];
+    const data = await loadJson('data.json');  // Дожидаемся завершения загрузки
+    let token = processTokenData(data, `${tokenName}`);
+    const sum = token.reduce((acc, value) => acc + value, 0);  // Суммируем все элементы массива
+    const average = sum / token.length;  // Делим сумму на количество элементов         console.log(token)
+    const pricePool = price * average
+
+
+    let tokenph = processTokenDataPower(data, `${tokenName}`);
+    const sumph = tokenph.reduce((acc, value) => acc + value / 1000000000, 0);  // Суммируем все элементы массива
+    const averageph = sumph / tokenph.length;  // Делим сумму на количество элементов
+    priceToOnePh = (1 / averageph) * pricePool
+    document.getElementById(`${pName}`).innerHTML = priceToOnePh.toFixed(2) + "$ at 1Ph/s";
+}
+
+
 async function processDataPriceStars() {
-    
+
     const data = await loadJson('data.json');  // Дожидаемся завершения загрузки
-        let token = processTokenData(data, `STARS`);
-        const sum = token.reduce((acc, value) => acc + value, 0);  // Суммируем все элементы массива
-        const average = sum / token.length;  // Делим сумму на количество элементов
-        var starPrice = 0.028
-        var Starsp = document.getElementById('STARS-p').innerText = ` $${(average * starPrice).toFixed(2)} USD`;
-        return Starsp
-        
-    
+    let token = processTokenData(data, `STARS`);
+    const sum = token.reduce((acc, value) => acc + value, 0);  // Суммируем все элементы массива
+    const average = sum / token.length;  // Делим сумму на количество элементов
+    var starPrice = 0.028
+    var Starsp = document.getElementById('STARS-p').innerText = ` $${(average * starPrice).toFixed(2)} USD`;
+    return Starsp
+
+}
+
+async function processDataPriceStarsToOnePh() {
+
+    const data = await loadJson('data.json');  // Дожидаемся завершения загрузки
+    let token = processTokenData(data, `STARS`);
+    const sum = token.reduce((acc, value) => acc + value, 0);  // Суммируем все элементы массива
+    const average = sum / token.length;  // Делим сумму на количество элементов
+    var starPrice = 0.028
+    var totalStarPrice = average * starPrice;
+
+    let tokenph = processTokenDataPower(data, `STARS`);
+    const sumph = tokenph.reduce((acc, value) => acc + value / 1000000000, 0);  // Суммируем все элементы массива
+    const averageph = sumph / tokenph.length;  // Делим сумму на количество элементов
+     const priceToOnePh = (1 / averageph) * totalStarPrice;
+    var Starsp = document.getElementById("STARS-hr").innerHTML = priceToOnePh.toFixed(2) + "$ at 1Ph/s";
+    return Starsp
+
 
 }
 
 
-async function processData(pName,tokenName) {
+async function processData(pName, tokenName) {
     const data = await loadJson('data.json');  // Дожидаемся завершения загрузки
-        let token = processTokenData(data, `${tokenName}`);
-        const sum = token.reduce((acc, value) => acc + value, 0);  // Суммируем все элементы массива
-        const average = sum / token.length;  // Делим сумму на количество элементов
-        document.getElementById(`${pName}`).innerHTML = average.toFixed(2);
+    let token = processTokenData(data, `${tokenName}`);
+    const sum = token.reduce((acc, value) => acc + value, 0);  // Суммируем все элементы массива
+    const average = sum / token.length;  // Делим сумму на количество элементов
+    document.getElementById(`${pName}`).innerHTML = average.toFixed(2);
 }
 
-async function processDataPower(pName,tokenName) {
+async function processDataPower(pName, tokenName) {
     const data = await loadJson('data.json');  // Дожидаемся завершения загрузки
-        let token = processTokenDataPower(data, `${tokenName}`);
-        const sum = token.reduce((acc, value) => acc + value/1000000000, 0);  // Суммируем все элементы массива
-        const average = sum / token.length;  // Делим сумму на количество элементов
-        document.getElementById(`${pName}`).innerHTML = 'Hash rate: ' + average.toFixed(2) + " Ph/s";
+    let token = processTokenDataPower(data, `${tokenName}`);
+    const sum = token.reduce((acc, value) => acc + value / 1000000000, 0);  // Суммируем все элементы массива
+    const average = sum / token.length;  // Делим сумму на количество элементов
+    document.getElementById(`${pName}`).innerHTML = 'Hash rate: ' + average.toFixed(2) + " Ph/s";
 }
 
 // Функция для обработки данных по токену
@@ -85,14 +120,14 @@ function processTokenData(data, tokenName) {
 }
 
 
-processData("CATI-p","CATI");
-processData("TON-p","TON");
-processData("NOT-p","NOT");
-processData("STARS-p","STARS");
-processData("DOGS-p","DOGS");
-processData("PX-p","PX");
-processData("MAJOR-p","MAJOR");
-processData("MATE-p","MATE");
+processData("CATI-p", "CATI");
+processData("TON-p", "TON");
+processData("NOT-p", "NOT");
+processData("STARS-p", "STARS");
+processData("DOGS-p", "DOGS");
+processData("PX-p", "PX");
+processData("MAJOR-p", "MAJOR");
+processData("MATE-p", "MATE");
 
 
 processDataPower("CATI-hr", 'CATI')
@@ -108,27 +143,48 @@ processDataPower("MATE-hr", 'MATE')
 
 
 
-switchInput.addEventListener('change', function() {
+switchInput.addEventListener('change', function () {
     if (switchInput.checked) {
         processDataPriceStars()
-        processDataPrice("CATI-p","CATI")
-        processDataPrice("TON-p","TON")
-        processDataPrice("NOT-p","NOT")
-        processDataPrice("DOGS-p","DOGS")
-        processDataPrice("PX-p","PX")
-        processDataPrice("MAJOR-p","MAJOR")
+        processDataPrice("CATI-p", "CATI")
+        processDataPrice("TON-p", "TON")
+        processDataPrice("NOT-p", "NOT")
+        processDataPrice("DOGS-p", "DOGS")
+        processDataPrice("PX-p", "PX")
+        processDataPrice("MAJOR-p", "MAJOR")
+
+        processDataPriceStarsToOnePh()
+        processDataPriceToOnePh("CATI-hr", "CATI")
+        processDataPriceToOnePh("TON-hr", 'TON')
+        processDataPriceToOnePh("NOT-hr", 'NOT')
+        processDataPriceToOnePh("DOGS-hr", 'DOGS')
+        processDataPriceToOnePh("PX-hr", 'PX')
+        processDataPriceToOnePh("MAJOR-hr", 'MAJOR')
     } else {
-        processData("CATI-p","CATI");
-        processData("TON-p","TON");
-        processData("NOT-p","NOT");
-        processData("STARS-p","STARS");
-        processData("DOGS-p","DOGS");
-        processData("PX-p","PX");
-        processData("MAJOR-p","MAJOR");
-        processData("MATE-p","MATE");
+        processData("CATI-p", "CATI");
+        processData("TON-p", "TON");
+        processData("NOT-p", "NOT");
+        processData("STARS-p", "STARS");
+        processData("DOGS-p", "DOGS");
+        processData("PX-p", "PX");
+        processData("MAJOR-p", "MAJOR");
+        processData("MATE-p", "MATE");
+
+        processDataPower("CATI-hr", 'CATI')
+        processDataPower("TON-hr", 'TON')
+        processDataPower("NOT-hr", 'NOT')
+        processDataPower("STARS-hr", 'STARS')
+        processDataPower("DOGS-hr", 'DOGS')
+        processDataPower("PX-hr", 'PX')
+        processDataPower("MAJOR-hr", 'MAJOR')
+        processDataPower("MATE-hr", 'MATE')
+
+
+
+
     }
-    
-  });
+
+});
 
 
 
