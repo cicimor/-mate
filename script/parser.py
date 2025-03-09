@@ -1,18 +1,58 @@
 import time
-import json
+import subprocess
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
+import json
+JSON_FILE = "data.json"
 
 # Настройки
 URL = "https://api.hashmate-bot.com/v1/mining/pools"
-URLTG = "https://web.telegram.org/a/"  
-JSON_FILE = "data.json"
-INTERVAL = 600  # 30 минут (в секундах)
+URL_TG = "https://web.telegram.org/a/#7560219861"
+INTERVAL = 900  #  (в секундах)
+BUTTON_CLASS = "bot-menu"
+
+chrome_path = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"  # Путь к Chrome
+subprocess.Popen([
+    chrome_path,
+    "--remote-debugging-port=9222",
+    "--user-data-dir=C:/selenium_chrome_profile",  # Уникальный профиль для сессии
+    "--new-window"
+])
+
+time.sleep(2)
 
 # Подключаемся к уже открытому браузеру
 options = webdriver.ChromeOptions()
 options.debugger_address = "localhost:9222"  # Подключение к уже запущенному Chrome
+
 driver = webdriver.Chrome(options=options)
+
+def open_telegram():
+    """Открывает Telegram Web в уже запущенном браузере."""
+    print("🌐 Открытие Telegram Web...")
+    driver.get(URL_TG)
+    time.sleep(5)  # Ждем загрузки страницы
+    # global tg_window
+    # tg_window = driver.current_window_handle  # Запоминаем вкладку с Telegram
+
+
+
+
+def click_button():
+    """Ищет и нажимает на кнопку."""
+    try:
+        time.sleep(3)  # Ждем загрузки
+        button = driver.find_element(By.CLASS_NAME, BUTTON_CLASS)  # Ищем кнопку по классу
+        if button:
+            button.click()
+            print("✅ Кнопка нажата.")
+        else:
+            print("❌ Кнопка не найдена.")
+    except Exception as e:
+        print(f"Ошибка при нажатии на кнопку: {e}")
+
 
 def load_existing_data():
     """Загружает данные из файла, если он есть."""
@@ -40,27 +80,19 @@ def scrape_data():
     except Exception as e:
         print(f"Ошибка при парсинге: {e}")
         return []
-    
-
-
-
-def refresh_page():
-    """Перезагружает страницу."""
-    print("🔄 Перезагрузка страницы...")
-    driver.refresh()  # Обновляем страницу
-    time.sleep(3)  # Даем немного времени на обновление страницы
 
 def main():
-    """Основной цикл парсинга."""
+    """Основной цикл обновления страницы и нажатия на кнопку."""  
     while True:
-        
-        # Перезагружаем страницу
-        refresh_page()
+        open_telegram()
+        time.sleep(5)
+        click_button()
 
-        existing_data = load_existing_data()  # Загружаем старые данные
-        new_data = scrape_data()  # Получаем новые данные
+        time.sleep(15)
 
-        # Объединяем новые данные со старыми, избегая дублирования
+        existing_data = load_existing_data()
+        new_data = scrape_data()
+
         existing_block_numbers = {item["lastBlockNumber"] for item in existing_data}
         for entry in new_data:
             
@@ -71,13 +103,9 @@ def main():
             else:
                 print("entry не является словарем:", entry)
 
-        # Сохраняем обновленный список
         save_data(existing_data)
         print(f"✅ Данные обновлены. Следующее обновление через {INTERVAL // 60} минут.")
-
-        
-        # Ждем 30 минут перед следующим запуском
-        time.sleep(INTERVAL)
+        time.sleep(INTERVAL)  # Ждем 10 минут
 
 if __name__ == "__main__":
     try:
