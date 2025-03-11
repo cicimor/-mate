@@ -50,7 +50,7 @@ async function processDataPriceToOnePh(pName, tokenName) {
     let tokenph = processTokenDataPower(data, `${tokenName}`);
     const sumph = tokenph.reduce((acc, value) => acc + value / 1000000000, 0);  // Суммируем все элементы массива
     const averageph = sumph / tokenph.length;  // Делим сумму на количество элементов
-    priceToOnePh = ((1 / averageph) * (pricePool * 0.7))
+    priceToOnePh = ((1 / (averageph + 1)) * (pricePool * 0.7))
     document.getElementById(`${pName}`).innerHTML = priceToOnePh.toFixed(2) + "$ at 1Ph/s";
 }
 
@@ -79,7 +79,7 @@ async function processDataPriceStarsToOnePh() {
     let tokenph = processTokenDataPower(data, `STARS`);
     const sumph = tokenph.reduce((acc, value) => acc + value / 1000000000, 0);  // Суммируем все элементы массива
     const averageph = sumph / tokenph.length;  // Делим сумму на количество элементов
-     const priceToOnePh = (1 / averageph) * (totalStarPrice * 0.7) ;
+     const priceToOnePh = (1 / (averageph +1)) * (totalStarPrice * 0.7) ;
     var Starsp = document.getElementById("STARS-hr").innerHTML = priceToOnePh.toFixed(2) + "$ at 1Ph/s";
     return Starsp
 
