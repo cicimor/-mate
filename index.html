@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,97 +8,229 @@
     <link rel="stylesheet" href="./styles/style.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
+
 <body class="body">
     <div class="header">
-    <div class="calculator">
-        <div class="value-box">
-            <div class="text-box">
-                <p  class="calculation-text">Total power</p>
-                <p  class="calculation-text">Your power</p>
-                <p  class="calculation-text" >Block reward</p>
+        <div class="calculator">
+            <div class="value-box">
+                <div class="text-box">
+                    <p class="calculation-text">Power</p>
+                    <p class="calculation-text">Your power</p>
+                    <p class="calculation-text">Block reward</p>
+                </div>
+                <div class="input-box">
+                    <input id="input-1" class="input" type="number" placeholder="Ph/s">
+                    <input id="input-2" class="input" type="number" placeholder="Ph/s">
+                    <input id="input-3" class="input" type="number">
+                </div>
             </div>
-            <div class="input-box">
-                <input id="input-1" class="input" type="number" placeholder="Ph/s">
-                <input id="input-2" class="input"type="number" placeholder="Ph/s">
-                <input id="input-3" class="input"type="number" >
+            <button id="butt" type="button" class="calculation-button">>Calculate<< /button>
+                    <p class="past-text">Your guarantee reward</p>
+                    <p id="str" class="result">?</p>
+        </div>
+        <h2 class="title">Average block</h2>
+        <div class="info">
+            <div class="to-price">
+                <p class="to-priceText">To price</p>
+                <label class="switch">
+                    <input id="switch-input" type="checkbox">
+                    <span class="slider"></span>
+                </label>
             </div>
+
+            <ul class="info_coin-list">
+                <li class="coin-list_item">
+                    <div class="name_token-box">
+                        <div class="token-box_img"><img src="./img/CATI.svg" alt="" width="23" height="23"></div>
+                        <p>CATI Coin</p>
+                    </div>
+                    <div class="block-stat">
+                        <p>Block reward</p>
+                        <div class="polosochka"></div>
+                        <p id="CATI-p">no info</p>
+                    </div>
+
+                    <div class="block-stat">
+                        <p>Block reward last 24h</p>
+                        <div class="polosochka"></div>
+                        <p id="CATI-p24">no info</p>
+                    </div>
+
+                    <div class="block-stat">
+                        <p>Power</p>
+                        <div class="polosochka"></div>
+                        <p id="CATI-hr">no info</p>
+                    </div>
+                </li>
+                <li class="coin-list_item">
+                    <div class="name_token-box">
+                        <div class="token-box_img"><img src="./img/TON.svg" alt="" width="23" height="23"></div>
+                        <p>TON Coin</p>
+                    </div>
+                    <div class="block-stat">
+                        <p>Block reward</p>
+                        <div class="polosochka"></div>
+                        <p id="TON-p">no info</p>
+                    </div>
+
+                    <div class="block-stat">
+                        <p>Block reward last 24h</p>
+                        <div class="polosochka"></div>
+                        <p id="TON-p24">no info</p>
+                    </div>
+
+                    <div class="block-stat">
+                        <p>Power</p>
+                        <div class="polosochka"></div>
+                        <p id="TON-hr">no info</p>
+                    </div>
+                </li>
+                <li class="coin-list_item">
+                    <div class="name_token-box">
+                        <div class="token-box_img"><img src="./img/NOT.svg" alt="" width="23" height="23"></div>
+                        <p>NOT Coin</p>
+                    </div>
+                    <div class="block-stat">
+                        <p>Block reward</p>
+                        <div class="polosochka"></div>
+                        <p id="NOT-p">no info</p>
+                    </div>
+
+                    <div class="block-stat">
+                        <p>Block reward last 24h</p>
+                        <div class="polosochka"></div>
+                        <p id="NOT-p24">no info</p>
+                    </div>
+
+                    <div class="block-stat">
+                        <p>Power</p>
+                        <div class="polosochka"></div>
+                        <p id="NOT-hr">no info</p>
+                    </div>
+                </li>
+                <li class="coin-list_item">
+                    <div class="name_token-box">
+                        <div class="token-box_img"><img src="./img/STARS.svg" alt="" width="23" height="23"></div>
+                        <p>STARS</p>
+                    </div>
+                    <div class="block-stat">
+                        <p>Block reward</p>
+                        <div class="polosochka"></div>
+                        <p id="STARS-p">no info</p>
+                    </div>
+
+                    <div class="block-stat">
+                        <p>Block reward last 24h</p>
+                        <div class="polosochka"></div>
+                        <p id="STARS-p24">no info</p>
+                    </div>
+
+                    <div class="block-stat">
+                        <p>Power</p>
+                        <div class="polosochka"></div>
+                        <p id="STARS-hr">no info</p>
+                    </div>
+                </li>
+                <li class="coin-list_item">
+                    <div class="name_token-box">
+                        <div class="token-box_img"><img src="./img/DOGS.svg" alt="" width="23" height="23"></div>
+                        <p>DOGS Coin</p>
+                    </div>
+                    <div class="block-stat">
+                        <p>Block reward</p>
+                        <div class="polosochka"></div>
+                        <p id="DOGS-p">no info</p>
+                    </div>
+
+                    <div class="block-stat">
+                        <p>Block reward last 24h</p>
+                        <div class="polosochka"></div>
+                        <p id="DOGS-p24">no info</p>
+                    </div>
+
+                    <div class="block-stat">
+                        <p>Power</p>
+                        <div class="polosochka"></div>
+                        <p id="DOGS-hr">no info</p>
+                    </div>
+                </li>
+                <li class="coin-list_item">
+                    <div class="name_token-box">
+                        <div class="token-box_img"><img src="./img/PX.svg" alt="" width="23" height="23"></div>
+                        <p>PX Coin</p>
+                    </div>
+                    <div class="block-stat">
+                        <p>Block reward</p>
+                        <div class="polosochka"></div>
+                        <p id="PX-p">no info</p>
+                    </div>
+
+                    <div class="block-stat">
+                        <p>Block reward last 24h</p>
+                        <div class="polosochka"></div>
+                        <p id="PX-p24">no info</p>
+                    </div>
+
+                    <div class="block-stat">
+                        <p>Power</p>
+                        <div class="polosochka"></div>
+                        <p id="PX-hr">no info</p>
+                    </div>
+                </li>
+                <li class="coin-list_item">
+                    <div class="name_token-box">
+                        <div class="token-box_img"><img src="./img/STARS.svg" alt="" width="23" height="23"></div>
+                        <p>MAJOR Coin</p>
+                    </div>
+
+
+                    <div class="block-stat">
+                        <p>Block reward</p>
+                        <div class="polosochka"></div>
+                        <p id="MAJOR-p">no info</p>
+                    </div>
+
+                    <div class="block-stat">
+                        <p>Block reward last 24h</p>
+                        <div class="polosochka"></div>
+                        <p id="MAJOR-p24">no info</p>
+                    </div>
+
+                    <div class="block-stat">
+                        <p>Power</p>
+                        <div class="polosochka"></div>
+                        <p id="MAJOR-hr">no info</p>
+                    </div>
+                </li>
+                <li class="coin-list_item">
+                    <div class="name_token-box">
+                        <div class="token-box_img"><img src="./img/MATE.svg" alt="" width="23" height="23"></div>
+                        <p>MATE Coin</p>
+                    </div>
+                    <div class="block-stat">
+                        <p>Block reward</p>
+                        <div class="polosochka"></div>
+                        <p id="MATE-p">no info</p>
+                    </div>
+
+                    <div class="block-stat">
+                        <p>Block reward last 24h</p>
+                        <div class="polosochka"></div>
+                        <p id="MATE-p24">no info</p>
+                    </div>
+
+                    <div class="block-stat">
+                        <p>Power</p>
+                        <div class="polosochka"></div>
+                        <p id="MATE-hr">no info</p>
+                    </div>
+                </li>
+            </ul>
         </div>
-        <button id="butt" type="button" class="calculation-button">>Calculate<</button>
-        <p class="past-text">Your guarantee reward</p>
-        <p id="str" class="result">?</p>
     </div>
-    <h2 class="title">Average block</h2>
-    <div class="info">
-        <div class="to-price">
-            <p class="to-priceText">To price</p>
-           <label class="switch">
-            <input id="switch-input" type="checkbox">
-            <span class="slider"></span>
-          </label> 
-        </div>
-        
-        <ul class="info_coin-list">
-            <li class="coin-list_item">
-                <p>CATI Coin</p>
-                <div>
-                    <p id="CATI-p">no info</p>
-                    <p id="CATI-hr">no info</p>
-                </div>
-            </li>
-            <li class="coin-list_item">
-                <p>TON coin</p>
-                <div>
-                    <p id="TON-p">no info</p>
-                    <p id="TON-hr">no info</p>
-                </div>
-            </li>
-            <li class="coin-list_item">
-                <p>NOT coin</p>
-                <div>
-                    <p id="NOT-p">no info</p>
-                    <p id="NOT-hr">no info</p>
-                </div>
-            </li>
-            <li class="coin-list_item">
-                <p>STARS</p>
-                <div>
-                    <p id="STARS-p">no info</p>
-                    <p id="STARS-hr">no info</p>
-                </div>
-            </li>
-            <li class="coin-list_item">
-                <p>DOGS Coin</p>
-                <div>
-                    <p id="DOGS-p">no info</p>
-                    <p id="DOGS-hr">no info</p>
-                </div>
-            </li>
-            <li class="coin-list_item">
-                <p>PX coin</p>
-                <div>
-                    <p id="PX-p">no info</p>
-                    <p id="PX-hr">no info</p>
-                </div>
-            </li>
-            <li class="coin-list_item">
-                <p>MAJOR Coin</p>
-                <div>
-                    <p id="MAJOR-p">no info</p>
-                    <p id="MAJOR-hr">no info</p>
-                </div>
-            </li>
-            <li class="coin-list_item">
-                <p>MATE</p>
-                <div>
-                    <p id="MATE-p">no info</p>
-                    <p id="MATE-hr">no info</p>
-                </div>
-            </li>
-        </ul>
-    </div>
-    </div>
-    
+
 
     <script src="./script/script.js"></script>
 </body>
+
 </html>
