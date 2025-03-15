@@ -1,116 +1,68 @@
-import time
-import subprocess
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.common.keys import Keys
+import requests
 import json
-JSON_FILE = "data.json"
+import os
+import time
 
-# Настройки
-URL = "https://api.hashmate-bot.com/v1/mining/pools"
-URL_TG = "https://web.telegram.org/a/#7560219861"
+
+# API-адрес
+url = "https://api.hashmate-bot.com/v1/mining/pools/"
+cookies = {
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjg4NywiaWF0IjoxNzQxODgyNzY4LCJleHAiOjE3NDIxODI3Njh9.sujyRv5gd7BI0_nhWsq4a8c4V4FzIqyjBhB6PsCNs_c"
+}
+
+# Файл для сохранения данных
+file_path = "data.json"
 INTERVAL = 900  #  (в секундах)
-BUTTON_CLASS = "bot-menu"
 
-chrome_path = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"  # Путь к Chrome
-subprocess.Popen([
-    chrome_path,
-    "--remote-debugging-port=9222",
-    "--user-data-dir=C:/selenium_chrome_profile",  # Уникальный профиль для сессии
-    "--new-window"
-])
-
-time.sleep(2)
-
-# Подключаемся к уже открытому браузеру
-options = webdriver.ChromeOptions()
-options.debugger_address = "localhost:9222"  # Подключение к уже запущенному Chrome
-
-driver = webdriver.Chrome(options=options)
-
-def open_telegram():
-    """Открывает Telegram Web в уже запущенном браузере."""
-    print("🌐 Открытие Telegram Web...")
-    driver.get(URL_TG)
-    time.sleep(5)  # Ждем загрузки страницы
-    # global tg_window
-    # tg_window = driver.current_window_handle  # Запоминаем вкладку с Telegram
-
-
-
-
-def click_button():
-    """Ищет и нажимает на кнопку."""
+def fetch_data():
+    """Получает данные с API"""
     try:
-        time.sleep(3)  # Ждем загрузки
-        button = driver.find_element(By.CLASS_NAME, BUTTON_CLASS)  # Ищем кнопку по классу
-        if button:
-            button.click()
-            print("✅ Кнопка нажата.")
-        else:
-            print("❌ Кнопка не найдена.")
-    except Exception as e:
-        print(f"Ошибка при нажатии на кнопку: {e}")
-
+        response = requests.get(url, cookies=cookies)
+        response.raise_for_status()
+        return response.json()  # Конвертируем в JSON
+    except requests.exceptions.RequestException as e:
+        print(f"Ошибка при запросе: {e}")
+        return []
 
 def load_existing_data():
-    """Загружает данные из файла, если он есть."""
-    try:
-        with open(JSON_FILE, "r", encoding="utf-8") as f:
-            return json.load(f)
-    except (FileNotFoundError, json.JSONDecodeError):
-        return []
+    """Загружает уже сохраненные данные"""
+    if os.path.exists(file_path):
+        with open(file_path, "r", encoding="utf-8") as file:
+            try:
+                return json.load(file)  # Загружаем существующие данные
+            except json.JSONDecodeError:
+                return []  # Если файл пустой или поврежден
+    return []
 
 def save_data(data):
-    """Сохраняет обновленные данные в JSON."""
-    with open(JSON_FILE, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+    """Сохраняет данные в файл"""
+    with open(file_path, "w", encoding="utf-8") as file:
+        json.dump(data, file, indent=4, ensure_ascii=False)  # Красиво форматируем JSON
 
-def scrape_data():
-    """Собирает данные с уже открытой страницы."""
-    try:
-        driver.get(URL)  # Загружаем сайт
-        time.sleep(3)  # Ждем загрузки
+def update_data():
+    """Основная логика обновления данных"""
+    print("🔄 Запрос новых данных...")
+    
+    # Загружаем старые данные
+    existing_data = load_existing_data()
 
-        pre_element = driver.find_element(By.TAG_NAME, "pre")
-        raw_data = pre_element.text  # Получаем JSON из <pre>
+    # Получаем новые данные
+    new_data = fetch_data()
 
-        return json.loads(raw_data)  # Преобразуем текст в JSON
-    except Exception as e:
-        print(f"Ошибка при парсинге: {e}")
-        return []
+    if not new_data:
+        print("⚠ Нет новых данных, ждем следующий запуск...")
+        return
 
-def main():
-    """Основной цикл обновления страницы и нажатия на кнопку."""  
-    while True:
-        open_telegram()
-        time.sleep(5)
-        click_button()
+    # Объединяем старые и новые данные, убирая дубликаты по lastBlockNumber
+    all_data = {item["lastBlockNumber"]: item for item in existing_data + new_data}.values()
 
-        time.sleep(15)
+    # Сохраняем в файл
+    save_data(list(all_data))
+    print("✅ Данные обновлены и сохранены!")
+    time.sleep(INTERVAL)
 
-        existing_data = load_existing_data()
-        new_data = scrape_data()
+print("⏳ Скрипт запущен, обновление каждые 15 минут...")
 
-        existing_block_numbers = {item["lastBlockNumber"] for item in existing_data}
-        for entry in new_data:
-            
-            if isinstance(entry, dict):  # Убедись, что entry — это словарь
-             if entry["lastBlockNumber"] not in existing_block_numbers:
-                if entry["lastBlockNumber"] not in existing_block_numbers:
-                 existing_data.append(entry)
-            else:
-                print("entry не является словарем:", entry)
-
-        save_data(existing_data)
-        print(f"✅ Данные обновлены. Следующее обновление через {INTERVAL // 60} минут.")
-        time.sleep(INTERVAL)  # Ждем 10 минут
-
-if __name__ == "__main__":
-    try:
-        main()
-    except KeyboardInterrupt:
-        print("⛔ Скрипт остановлен пользователем.")
-    finally:
-        driver.quit()
+# Бесконечный цикл для выполнения задач по расписанию
+while True:
+    update_data()
