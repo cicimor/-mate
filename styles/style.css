@@ -1,200 +1,164 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
-*:hover {
+
+/* Общие стили */
+* {
     border: none;
     outline: none;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
-*:focus {
-    border: none;
-    outline: none;
-}
-.body {
+
+body {
     background-image: url(../img/background.jpeg);
     background-size: 150%;
-    font-family: Manrope;
+    font-family: 'Manrope', sans-serif;
     font-size: 12px;
     font-weight: 700;
     line-height: 16px;
-
 }
 
+/* Контейнеры */
 .header {
     margin: 20px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-
 }
 
-.calculator {
+.calculator, .info {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     min-width: 360px;
     min-height: 360px;
-    box-sizing: border-box;
     border: 2px solid rgb(255, 211, 2);
     border-radius: 35px;
     background: rgb(35, 35, 35);
-    flex-direction: column;
-
-
+    padding: 15px 0;
 }
 
+/* Блок с вводом значений */
 .value-box {
     display: flex;
     width: 100%;
     height: 100px;
-    margin: 48px 0 0;
+    margin-top: 48px;
     justify-content: space-between;
+}
+
+.text-box, .input-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.text-box {
+    width: 78px;
+    margin: 0 22px;
+    color: rgb(166, 166, 166);
+    font-weight: 500;
 }
 
 .input-box {
     width: 78px;
-    height: 100%;
-    margin: 0 22px 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-
-}
-
-.text-box {
-    margin: 0 0 0 22px;
-    font-size: 14px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-
-}
-
-.calculation-text {
-    color: rgb(166, 166, 166);
-    margin: 0;
-    font-weight: 500;
-}
-
-.calculation-text:not(:last-child) {
-    margin: 0 0 10px;
+    margin: 0 22px;
 }
 
 .input {
+    width: 68px;
+    height: 20px;
     border: 1px solid rgb(255, 211, 2);
     border-radius: 10px;
     background: none;
-    width: 68px;
-    height: 20px;
     color: rgb(185, 185, 185);
-    padding: 0 0 0 8px;
+    padding-left: 8px;
 }
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    /* display: none; <- Crashes Chrome on hover */
     -webkit-appearance: none;
-    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+    margin: 0;
 }
 
-
-
+/* Кнопка */
 .calculation-button {
-    background:  rgb(255, 211, 2);
+    background: rgb(255, 211, 2);
     width: 230px;
-height: 35px;
-border-radius: 9px;
-margin: 26px auto 0;
-font-size: 16px;
-border: none;
+    height: 35px;
+    border-radius: 9px;
+    margin-top: 26px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
 }
 
 .calculation-button:active {
     opacity: 0.6;
 }
 
-.past-text {
-    color: rgb(166, 166, 166);
-    margin: 24px auto 0;
+/* Текстовые элементы */
+.past-text, .result {
+    margin-top: 24px;
     font-size: 16px;
     font-weight: 400;
+    color: rgb(166, 166, 166);
 }
 
 .result {
-    color: rgb(255, 211, 2);
-    margin: 30px auto 0;
+    margin-top: 30px;
     font-size: 22px;
-    font-weight: 400;
+    color: rgb(255, 211, 2);
 }
 
-
-
-
-
-.info {
-    margin-top: 10px;
-    flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        display: flex;
-        min-width: 360px;
-        min-height: 360px;
-        box-sizing: border-box;
-        border: 2px solid rgb(255, 211, 2);
-        border-radius: 35px;
-        background: rgb(35, 35, 35);
-        padding: 15px 0;
-        flex-direction: column;
-       
-
+.title {
+    color: white;
+    margin: 25px 0 10px;
 }
 
+/* Блок с информацией о монетах */
 .info_coin-list {
-    margin: 0 0 0;
-    padding: 0;
-    height: 100%;
     width: 90%;
+    list-style: none;
 }
 
 .coin-list_item {
-    list-style: none;
-    color: rgb(166, 166, 166);;
+    padding: 12px 0;
     font-size: 18px;
-    padding: 12px 0 12px;
     font-weight: 400;
+    border-bottom: 1px solid #3C3C3C;
     display: flex;
-    border-bottom: 1px #3C3C3C solid;
     flex-direction: column;
+    color: rgb(166, 166, 166);
 }
 
-.coin-list_item:first-child{
-    padding: 0 0 12px;
+.coin-list_item:first-child {
+    padding-top: 0;
 }
-
 
 .name_token-box {
     display: flex;
-    margin: 0 0 15px;
-    padding: 0 0 15px;
-    border: solid #3C3C3C;
-    border-top-width: 0;
-    border-right-width: 0;
-    border-bottom-width: 1px;
-    border-left-width: 0;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #3C3C3C;
 }
 
 .token-box_img {
     width: 49px;
     height: 49px;
-    background-color: #3c3c3c;
-    border-radius: 100px;
+    background-color: #3C3C3C;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 12px 0 0;
+    margin-right: 12px;
 }
 
-.name_token-box>p {
+.name_token-box p {
     margin: 0;
     font-weight: 700;
-    align-items: center;
-    display: flex;
     color: white;
     font-size: 16px;
 }
@@ -203,65 +167,38 @@ border: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
+}
 
-  .block-stat>P {
+.block-stat p {
     margin: 0;
     font-size: 12px;
     font-weight: 500;
     white-space: nowrap;
-  } 
+}
 
 .polosochka {
     width: 100%;
     height: 1px;
     background-color: #3C3C3C;
     margin: 0 7px;
-}  
-
-/* .coin-list_item>div:last-child {
-    margin: 0 0 0 auto;
 }
-
-.coin-list_item>div>p {
-    margin: 0;
-    text-align: right;
-}
-
-.coin-list_item>div>p:last-child {
-    margin: 0;
-    font-size: 12px;
-    text-align: right;
-    opacity: 0.5;
-} */
 
 .coin-list_item:last-child {
-    padding: 12px 0 0 0;
     border: none;
 }
 
-
-
-.info-value {
-    margin: 0 22px 0 0;
-    padding: 0;
-}
-
-.title {
-    color: white;
-    margin: 25px 0 0;
-}
-
+/* Тогл */
 .to-price {
     display: flex;
     align-items: center;
-    margin: 0 18px 18px auto;
+    margin-bottom: 18px;
+    margin-left: auto;
+    margin-right: 20px;
 }
 
 .to-priceText {
     color: white;
-    margin: 0 6px 0 0;
-    
+    margin-right: 6px;
 }
 
 .switch {
@@ -269,40 +206,32 @@ border: none;
     display: inline-block;
     width: 50px;
     height: 25px;
-  }
+}
 
-  /* Скрыть стандартный чекбокс */
-  .switch input {
+.switch input {
     opacity: 0;
     width: 0;
     height: 0;
-    
-  }
-
- 
-
-.switch:active {
-    -webkit-tap-highlight-color: transparent; /* Убираем подсветку на мобильных */
 }
 
-  /* Стиль для фона свича */
-  .slider {
+.switch:active {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.slider {
     position: absolute;
     cursor: pointer;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgb(35, 35, 35);;
+    background-color: rgb(35, 35, 35);
     transition: 0.4s;
     border-radius: 34px;
     border: 2px solid rgb(255, 211, 2);
-    /* outline: 2px  rgb(255, 211, 2) solid; */
-    
-  }
+}
 
-  /* Стиль для круга внутри свича */
-  .slider:before {
+.slider:before {
     position: absolute;
     content: "";
     height: 15px;
@@ -310,20 +239,15 @@ border: none;
     border-radius: 50%;
     left: 4px;
     bottom: 3.5px;
-    background-color: rgb(255, 211, 2);;
+    background-color: rgb(255, 211, 2);
     transition: 0.4s;
-    
-    
-  }
+}
 
-  /* Когда переключатель активен */
-  input:checked + .slider {
-    background-color: rgb(255, 211, 2);;
-  }
+input:checked + .slider {
+    background-color: rgb(255, 211, 2);
+}
 
-  /* Когда переключатель активен, двигаем круг */
-  input:checked + .slider:before {
+input:checked + .slider:before {
     transform: translateX(25px);
     background-color: rgb(35, 35, 35);
-  }
-
+}
