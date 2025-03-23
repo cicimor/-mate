@@ -142,7 +142,7 @@ async function processDataPower(pName, tokenName) {
 // Функция для обработки данных по токену
 function processTokenDataPower(data, tokenName) {
     const filteredData = data.filter(item => item.token === tokenName);
-    const rewards = filteredData.map(item => item.powerBN);
+    const rewards = filteredData.slice(-480).map(item => item.powerBN);
     const reward = (`${tokenName} rewards:`, rewards);
     return reward
 }
@@ -156,7 +156,7 @@ function processTokenDataL24(data, tokenName) {
 
 function processTokenData(data, tokenName) {
     const filteredData = data.filter(item => item.token === tokenName);
-    const rewards = filteredData.slice(-0).map(item => item.lastBlockReward);
+    const rewards = filteredData.slice(-480).map(item => item.lastBlockReward);
     const reward = (`${tokenName} rewards:`, rewards);
     return reward
 }
