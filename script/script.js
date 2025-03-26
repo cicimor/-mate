@@ -27,8 +27,6 @@ async function processDataPrice(pNamePrice, tokenName) {
 
     const price = dataPrice[tokenName];
 
-
-
     const data = await loadJson('data.json');  // Дожидаемся завершения загрузки
     let token = processTokenData(data, `${tokenName}`);
     const sum = token.reduce((acc, value) => acc + value, 0);  // Суммируем все элементы массива
