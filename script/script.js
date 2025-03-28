@@ -116,6 +116,7 @@ async function processDataPriceStarsToOnePh() {
 async function processData(pName, tokenName) {
     const data = await loadJson('data.json');  // Дожидаемся завершения загрузки
     let token = processTokenData(data, `${tokenName}`);
+    console.log(token)
     const sum = token.reduce((acc, value) => acc + value, 0);  // Суммируем все элементы массива
     const average = sum / token.length;  // Делим сумму на количество элементов
     document.getElementById(`${pName}`).innerHTML = average.toFixed(2);
@@ -154,7 +155,7 @@ function processTokenDataL24(data, tokenName) {
 
 function processTokenData(data, tokenName) {
     const filteredData = data.filter(item => item.token === tokenName);
-    const rewards = filteredData.slice(-480).map(item => item.lastBlockReward);
+    const rewards = filteredData.slice(0).map(item => item.lastBlockReward);
     const reward = (`${tokenName} rewards:`, rewards);
     return reward
 }
