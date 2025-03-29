@@ -5,7 +5,7 @@ import requests
 tokens = ["CATI", "TON", "NOT", "DOGS", "PX", "MAJOR"]
 api_url = "https://api.coingecko.com/api/v3/simple/price?ids={}&vs_currencies=usd"
 
-# Сопоставление тикеров с идентификаторами в API CoinGecko
+
 TOKEN_IDS = {
     "CATI": "catizen",
     "TON": "the-open-network",
