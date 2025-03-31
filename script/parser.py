@@ -7,13 +7,15 @@ import time
 # API-адрес
 url = "https://api.hashmate-bot.com/v1/mining/pools/"
 cookies = {
-    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjg4NywiaWF0IjoxNzQzMjUyODM4LCJleHAiOjE3NDM1NTI4Mzh9.oYJdS6slWTaSVsqNUx-WbwXEe0AZXfcUuCPQmpT5fkU"
-}
+        "CPKvXaI3sTgNdjmFNtl7O7KQOpQaCTl0_gvvs99MC9U-1743279837-1.0.1.1-Y8pWySR5ipcE2NGajRe.mryRkVDp48uGb73WgnBstRXPXQ1.EmCj644cLnMwl8X0RJ8oKgNu4XKFoUGdB.6_BBZnr3IABTVfGhtvstAPCI4": "",
+        "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjg4NywiaWF0IjoxNzQzMjc5ODM5LCJleHAiOjE3NDM1Nzk4Mzl9.GZzv8U9eei4-ZPu5vYqliozD2lx40Xejlb5s4v_9SNk",
+        "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjg4NywiaWF0IjoxNzQzMjc5ODM5LCJleHAiOjQzMzUyNzk4Mzl9.P2xzGUBMRaimlsd9nS-FB2K47ExbhC5sSAl0dHMs6jE"
+    }
 
 # Файл для сохранения данных
 file_path = "data.json"
 INTERVAL = 900  #  (в секундах)
-
+    
 def fetch_data():
     """Получает данные с API"""
     try:

@@ -130,6 +130,13 @@ async function processDataL24(pName, tokenName) {
     document.getElementById(`${pName}`).innerHTML = average.toFixed(2);
 }
 
+// async function processDataL24(pName, tokenName) {
+//     const data = await loadJson('data.json');  // Дожидаемся завершения загрузки
+//     let token = processTokenDataL24(data, `${tokenName}`);
+//     const maxValue = Math.max(...token);  // Находим максимальное значение
+//     document.getElementById(`${pName}`).innerHTML = maxValue.toFixed(2);
+// }
+
 async function processDataPower(pName, tokenName) {
     const data = await loadJson('data.json');  // Дожидаемся завершения загрузки
     let token = processTokenDataPower(data, `${tokenName}`);
