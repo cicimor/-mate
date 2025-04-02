@@ -15,7 +15,7 @@ cookies = {
 # Файл для сохранения данных
 file_path = "data.json"
 INTERVAL = 900  #  (в секундах)
-    
+
 def fetch_data():
     """Получает данные с API"""
     try:
