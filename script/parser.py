@@ -3,28 +3,33 @@ import json
 import os
 import time
 
-
 # API-адрес
 url = "https://api.hashmate-bot.com/v1/mining/pools/"
 cookies = {
-        "CPKvXaI3sTgNdjmFNtl7O7KQOpQaCTl0_gvvs99MC9U-1743279837-1.0.1.1-Y8pWySR5ipcE2NGajRe.mryRkVDp48uGb73WgnBstRXPXQ1.EmCj644cLnMwl8X0RJ8oKgNu4XKFoUGdB.6_BBZnr3IABTVfGhtvstAPCI4": "",
-        "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjg4NywiaWF0IjoxNzQzMjc5ODM5LCJleHAiOjE3NDM1Nzk4Mzl9.GZzv8U9eei4-ZPu5vYqliozD2lx40Xejlb5s4v_9SNk",
-        "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjg4NywiaWF0IjoxNzQzMjc5ODM5LCJleHAiOjQzMzUyNzk4Mzl9.P2xzGUBMRaimlsd9nS-FB2K47ExbhC5sSAl0dHMs6jE"
-    }
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjg4NywiaWF0IjoxNzQzOTQ5NzE3LCJleHAiOjE3NDQyNDk3MTd9.iAXTiOOph02WaA33IwJO7XTwKe-AQhObjTjqAdKCTHw"
+}
+
+headers = {
+    "Accept": "application/json",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36",
+    "Authorization": f"Bearer {cookies['accessToken']}",  # Добавляем токен в заголовок
+    "Accept-Language": "ru,en;q=0.9",
+    "Cache-Control": "max-age=0"
+}
 
 # Файл для сохранения данных
 file_path = "data.json"
-INTERVAL = 900  #  (в секундах)
+INTERVAL = 900  # 15 минут в секундах
 
 def fetch_data():
     """Получает данные с API"""
     try:
-        response = requests.get(url, cookies=cookies)
-        response.raise_for_status()
-        return response.json()  # Конвертируем в JSON
+        response = requests.get(url, cookies=cookies, headers=headers)  # Добавляем headers
+        response.raise_for_status()  # Проверим на ошибки HTTP
+        return response.json()  # Конвертируем ответ в JSON
     except requests.exceptions.RequestException as e:
         print(f"Ошибка при запросе: {e}")
-        return []
+        return []  # Возвращаем пустой список при ошибке
 
 def load_existing_data():
     """Загружает уже сохраненные данные"""
@@ -33,8 +38,8 @@ def load_existing_data():
             try:
                 return json.load(file)  # Загружаем существующие данные
             except json.JSONDecodeError:
-                return []  # Если файл пустой или поврежден
-    return []
+                return []  # Если файл пустой или поврежден, возвращаем пустой список
+    return []  # Если файл не существует, возвращаем пустой список
 
 def save_data(data):
     """Сохраняет данные в файл"""
@@ -44,7 +49,7 @@ def save_data(data):
 def update_data():
     """Основная логика обновления данных"""
     print("🔄 Запрос новых данных...")
-    
+
     # Загружаем старые данные
     existing_data = load_existing_data()
 
@@ -61,10 +66,10 @@ def update_data():
     # Сохраняем в файл
     save_data(list(all_data))
     print("✅ Данные обновлены и сохранены!")
-    time.sleep(INTERVAL)
 
+# Основной цикл обновления данных каждые 15 минут
 print("⏳ Скрипт запущен, обновление каждые 15 минут...")
 
-# Бесконечный цикл для выполнения задач по расписанию
 while True:
     update_data()
+    time.sleep(INTERVAL)  # Задержка на 15 минут
