@@ -99,7 +99,7 @@ async function processDataPriceStarsToOnePh() {
     let token = processTokenData(data, `STARS`);
     const sum = token.reduce((acc, value) => acc + value, 0);  // Суммируем все элементы массива
     const average = sum / token.length;  // Делим сумму на количество элементов
-    var starPrice = 0.028
+    var starPrice = 0.013
     var totalStarPrice = average * starPrice;
 
     let tokenph = processTokenDataPower(data, `STARS`);
@@ -262,6 +262,9 @@ switchInput.addEventListener('change', function () {
     }
 
 });
+
+
+
 
 
 
