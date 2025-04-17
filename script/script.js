@@ -74,7 +74,7 @@ async function processDataPriceStars() {
     let token = processTokenData(data, `STARS`);
     const sum = token.reduce((acc, value) => acc + value, 0);  // Суммируем все элементы массива
     const average = sum / token.length;  // Делим сумму на количество элементов
-    var starPrice = 0.028
+    var starPrice = 0.013
     document.getElementById('STARS-p').innerText = ` $${(average * starPrice).toFixed(2)} USD`;
 
 
@@ -86,7 +86,7 @@ async function processDataPriceStarsL24() {
     let token = processTokenDataL24(data, `STARS`);
     const sum = token.reduce((acc, value) => acc + value, 0);  // Суммируем все элементы массива
     const average = sum / token.length;  // Делим сумму на количество элементов
-    var starPrice = 0.028
+    var starPrice = 0.013
     document.getElementById('STARS-p24').innerText = ` $${(average * starPrice).toFixed(2)} USD`;
 
 
