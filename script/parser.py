@@ -6,7 +6,7 @@ import time
 # API-адрес
 url = "https://api.hashmate-bot.com/v1/mining/pools/"
 cookies = {
-    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjg4NywiaWF0IjoxNzQ1MTQ1MjIzLCJleHAiOjE3NDU0NDUyMjN9.IiLnCPwFZrNr7Fdv1rH_ei5HsWNhTgVFPhb7yWPOW9E"
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjg4NywiaWF0IjoxNzQ1NjkyOTMzLCJleHAiOjE3NDU5OTI5MzN9.sZ16gSUyKwF-47d9B0b5CFEqzqWTaay85TAPlUr9jrQ"
 }
 
 
