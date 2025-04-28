@@ -11,12 +11,12 @@ butt.onclick = function () {
 
 async function loadJson(jsonName) {
     try {
-        const response = await fetch([jsonName]);  // Указывайте путь к вашему JSON
+        const response = await fetch([jsonName]); 
         const data = await response.json();  // Преобразует JSON в объект
         return data;  // Возвращаем данные
     } catch (error) {
         console.error('Ошибка при загрузке JSON:', error);
-        return null;  // Возвращаем null в случае ошибки
+        return null;  
     }
 }
 
